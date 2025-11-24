@@ -5,3 +5,5 @@ public class Customer {
     private JButton cartButton;
     private JButton myOrderButton;
 }
+
+
