@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class Customer {
+public class SignIn {
     private JComboBox comboBox1;
     private JButton cartButton;
     private JButton myOrderButton;

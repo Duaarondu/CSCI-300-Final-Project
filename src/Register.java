@@ -1,11 +1,11 @@
 import javax.swing.*;
 
-public class Employee extends JFrame {
+public class Register extends JFrame {
     private JPanel contentPane;
 
     private JPanel panel;
 
-    public Employee() {
+    public Register() {
         this.setContentPane(this.panel);
         this.setTitle("Employee");
         this.setBounds(600, 200, 300, 300);

@@ -5,9 +5,8 @@ import java.sql.SQLException;
 
 public class MainMenu extends JDialog {
     private JPanel contentPane;
-    private JButton customerButton;
-    private JButton employeeButton;
-    private JButton adminButton;
+    private JButton signInButton;
+    private JButton registerButton;
 
     public MainMenu() {
         this.setContentPane(contentPane);
@@ -16,51 +15,39 @@ public class MainMenu extends JDialog {
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        setUpCustomerButtonAction();
-        setUpEmployeeButtonAction();
-        setUpAdminButtonAction();
+        setUpSignInButtonAction();
+        setUpRegisterButtonAction();
+
     }
-    public void setUpCustomerButtonAction() {
-        customerButton.addActionListener(new ActionListener() {
+    public void setUpSignInButtonAction() {
+        signInButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                goToCustomer();
+                goToSignIn();
             }
         });
     }
 
-    public void setUpEmployeeButtonAction() {
-        employeeButton.addActionListener(new ActionListener() {
+    public void setUpRegisterButtonAction() {
+        registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                goToEmployee();
+                goToRegister();
             }
         });
     }
 
-    public void setUpAdminButtonAction() {
-        adminButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                goToAdmin();
-            }
-        });
+
+    public void goToSignIn() {
+        this.dispose();
+        new SignIn();
     }
 
-    public void goToCustomer() {
+    public void goToRegister() {
         this.dispose();
-        new Customer();
+        new Register();
     }
 
-    public void goToEmployee() {
-        this.dispose();
-        new Employee();
-    }
-
-    public void goToAdmin() {
-        this.dispose();
-        new Admin();
-    }
 
     public static void main(String[] args) {
         Database.connect();
