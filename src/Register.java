@@ -20,7 +20,7 @@ public class Register extends JFrame {
 
     }
 
-    public void SetUPCreateButton() {
+    public void SetUPCreateButton() { //Lets the customer create their new account to go straight to the catalog
         createButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

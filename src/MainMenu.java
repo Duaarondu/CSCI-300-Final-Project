@@ -19,7 +19,7 @@ public class MainMenu extends JDialog {
         setUpRegisterButtonAction();
 
     }
-    public void setUpSignInButtonAction() {
+    public void setUpSignInButtonAction() {      // this button allows the customer to sign in with their saved account
         signInButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -28,7 +28,7 @@ public class MainMenu extends JDialog {
         });
     }
 
-    public void setUpRegisterButtonAction() {
+    public void setUpRegisterButtonAction() { //This button will have Customers create an Account if they don't have one
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

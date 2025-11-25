@@ -1,10 +1,12 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Catalog extends JFrame {
-    private JComboBox comboBox1;
     private JButton cartButton;
     private JButton myOrderButton;
     private JPanel panel;
+    private JTable table;
 
     public Catalog() {
 
@@ -13,7 +15,32 @@ public class Catalog extends JFrame {
             this.setBounds(600, 200, 300, 300);
             this.setVisible(true);
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            SetUpCartButton();
+            SetUpOrderButton();
+
+
     }
+
+    public void SetUpCartButton() {
+        cartButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+    }
+
+    public void SetUpOrderButton() {
+        myOrderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+    }
+
+
 }
 
 
