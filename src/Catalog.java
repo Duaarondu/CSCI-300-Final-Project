@@ -33,7 +33,7 @@ public class Catalog extends JFrame {
 
     public void itemList() {
         this.setContentPane(this.panel);
-        this.setTitle("Table Demo");
+        this.setTitle("Thrift Store");
         this.setBounds(600, 200, 300, 300);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -104,7 +104,6 @@ public class Catalog extends JFrame {
         });
 
     }
-
 
 }
 
