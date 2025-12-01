@@ -1,6 +1,10 @@
+import net.proteanit.sql.DbUtils;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class Catalog extends JFrame {
     private JButton cartButton;
@@ -19,34 +23,30 @@ public class Catalog extends JFrame {
         SetUpCartButton();
         SetUpOrderButton();
         SetUpBackButton();
+        this.itemList();
 
     }
 
-//    public itemList() {
-//        this.setContentPane(this.panel);
-//        this.setTitle("Table Demo");
-//        this.setBounds(600, 200, 300, 300);
-//        this.setVisible(true);
-//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//
-//        this.populateTable();
-//    }
-//
-//    public void populateTable() {
-//        try {
-//            String query = "SELECT Appointments.appointment_time, Patients.patient_name, Doctors.doctor_name " +
-//                    "FROM Appointments " +
-//                    "JOIN Patients " +
-//                    "ON Appointments.patient_id = Patients.patient_id " +
-//                    "JOIN Doctors " +
-//                    "ON Appointments.doctor_id = Doctors.doctor_id";
-//            PreparedStatement stm = Database.connection.prepareStatement(query);
-//            ResultSet result = stm.executeQuery(query);
-//            table1.setModel(DbUtils.resultSetToTableModel(result));
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    public void itemList() {
+        this.setContentPane(this.panel);
+        this.setTitle("Table Demo");
+        this.setBounds(600, 200, 300, 300);
+        this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        this.populateTable();
+    }
+
+    public void populateTable() {
+        try {
+            String query = "SELECT items.item_id, items.name, items.price, items.quantity_in_stock ";
+            PreparedStatement stm = Database.connection.prepareStatement(query);
+            ResultSet result = stm.executeQuery(query);
+            table.setModel(DbUtils.resultSetToTableModel(result));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void SetUpCartButton() {
         cartButton.addActionListener(new ActionListener() {
