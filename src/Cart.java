@@ -6,6 +6,7 @@ public class Cart extends JFrame {
     private JPanel panel;
     private JTable cartTable;
     private JButton checkoutButton;
+    private JButton backButton;
 
     public Cart() {
         this.setContentPane(this.panel);
@@ -13,8 +14,9 @@ public class Cart extends JFrame {
         this.setBounds(600, 200, 300, 300);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        this.SetUpBackButton();
         setupCheckoutButton();
+
     }
 
     public void setupCheckoutButton() {
@@ -24,6 +26,18 @@ public class Cart extends JFrame {
 
             }
         });
+    }
+
+    public void SetUpBackButton() {
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new Catalog().setVisible(true);
+
+            }
+        });
+
     }
 
 }

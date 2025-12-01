@@ -39,7 +39,7 @@ public class Catalog extends JFrame {
 
     public void populateTable() {
         try {
-            String query = "SELECT items.item_id, items.name, items.price, items.quantity_in_stock ";
+            String query = "SELECT item_id,name, price, quantity_in_stock FROM items ";
             PreparedStatement stm = Database.connection.prepareStatement(query);
             ResultSet result = stm.executeQuery(query);
             table.setModel(DbUtils.resultSetToTableModel(result));
@@ -52,10 +52,17 @@ public class Catalog extends JFrame {
         cartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                goToCart();
+
 
             }
         });
 
+    }
+
+    public void goToCart(){
+        this.dispose();
+        new Cart();
     }
 
     public void SetUpOrderButton() {
