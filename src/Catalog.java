@@ -12,6 +12,7 @@ public class Catalog extends JFrame {
     private JPanel panel;
     private JTable table;
     private JButton backButton;
+    private JButton ADDButton;
 
     public Catalog() {
 
@@ -24,6 +25,9 @@ public class Catalog extends JFrame {
         SetUpOrderButton();
         SetUpBackButton();
         this.itemList();
+        this.setUpAddButton();
+
+
 
     }
 
@@ -33,7 +37,6 @@ public class Catalog extends JFrame {
         this.setBounds(600, 200, 300, 300);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         this.populateTable();
     }
 
@@ -69,10 +72,26 @@ public class Catalog extends JFrame {
         myOrderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                goToOrders();
 
             }
         });
     }
+
+    public void goToOrders() {
+        this.dispose();
+        new Orders();
+    }
+
+    public void setUpAddButton(){   //this will add any items chosen by user and sent into the cart page
+        ADDButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+    }
+
 
     public void SetUpBackButton() {
         backButton.addActionListener(new ActionListener() {

@@ -14,8 +14,11 @@ public class Cart extends JFrame {
         this.setBounds(600, 200, 300, 300);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setupCheckoutButton();
         this.SetUpBackButton();
-        setupCheckoutButton();
+
+
+
 
     }
 
