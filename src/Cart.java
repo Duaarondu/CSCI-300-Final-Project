@@ -26,6 +26,4 @@ public class Cart extends JFrame {
         });
     }
 
-
-
 }
