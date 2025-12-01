@@ -112,7 +112,6 @@ public class SignIn extends JFrame {
                         openAdminMenu(fullName, usernameText);
                         break;
                 }
-
                 return true;
             }
         }
