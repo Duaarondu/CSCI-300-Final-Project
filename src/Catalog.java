@@ -88,7 +88,36 @@ public class Catalog extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                int selectedRow = table.getSelectedRow();
+
+                //1. make sure a row is selected
+                if(selectedRow == -1){
+                    JOptionPane.showMessageDialog(Catalog.this,
+                            "Please select an item from the catalog first.",
+                            "No item selected", JOptionPane.WARNING_MESSAGE
+                    );
+                    return;
+                }
+                // 2. Grab values from the selected row
+                Object itemIdObj = table.getValueAt(selectedRow, 0);  // item_id
+                Object nameObj   = table.getValueAt(selectedRow, 1);  // name
+                Object priceObj  = table.getValueAt(selectedRow, 2);  // price
+                Object quantityObj = table.getValueAt(selectedRow, 3);
+
+                //int quantity = 1; // default quantity to add
+
+                // 3. Add to the shared Cart model
+                Cart.cartTableModel.addRow(new Object[]{
+                        itemIdObj,
+                        nameObj,
+                        priceObj,
+                        quantityObj
+
+                });
+
             }
+
+
         });
     }
 
