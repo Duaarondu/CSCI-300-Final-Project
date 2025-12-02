@@ -52,7 +52,7 @@ public class AdminMenu extends JDialog {
         orderChangerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                goToOrderChanger();
+                goToAccountManager();
             }
         });
     }
