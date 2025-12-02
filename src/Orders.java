@@ -46,7 +46,7 @@ public class Orders extends JFrame {
 
 
 
-    public void setupCancelOrderButton() {  //just added
+    public void setupCancelOrderButton() {
         cancelOrderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
