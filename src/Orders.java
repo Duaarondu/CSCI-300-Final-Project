@@ -1,6 +1,10 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Orders extends JFrame {
     private JButton cancelOrderButton;
@@ -51,7 +55,7 @@ public class Orders extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                // 1. Confirm cancel (optional)
+                // 1. Confirm cancel
                 int confirm = JOptionPane.showConfirmDialog(
                         Orders.this,
                         "Are you sure you want to cancel your entire order?",
@@ -62,7 +66,6 @@ public class Orders extends JFrame {
                 if (confirm != JOptionPane.YES_OPTION) {
                     return;
                 }
-
                 // 2. CLEAR the cart
                 Cart.cartTableModel.setRowCount(0);
 
@@ -73,8 +76,7 @@ public class Orders extends JFrame {
                 if (totalLabel != null) {
                     totalLabel.setText("Total: $0.00");
                 }
-
-                // 5. Feedback (optional)
+                // 5. Feedback
                 JOptionPane.showMessageDialog(
                         Orders.this,
                         "Order has been canceled."
@@ -94,6 +96,7 @@ public class Orders extends JFrame {
 
     }
 
+
     public void SetUpBackButton() {
         backButton.addActionListener(new ActionListener() {
             @Override
@@ -109,3 +112,4 @@ public class Orders extends JFrame {
 
 }
 
+//we have order_items table in mySQL workbench  which is empty
