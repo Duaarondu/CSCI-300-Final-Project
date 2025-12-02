@@ -12,7 +12,6 @@ public class AccountManager extends JFrame {
     private JButton refreshButton;
     private JButton backButton;
     private JComboBox<String> typeCombo;
-    private JTable table1;
 
     private DefaultTableModel tableModel;
 
@@ -198,5 +197,11 @@ public class AccountManager extends JFrame {
         stm.executeUpdate();
 
         JOptionPane.showMessageDialog(this, "Employee deleted!");
+
+        backButton.addActionListener(e -> {
+            dispose();
+            new AdminMenu();
+        });
     }
+
 }

@@ -19,7 +19,7 @@ public class AdminMenu extends JDialog {
         logOutButton();
         setUpCreateEmployeeButtonAction();
         setUpOrderChangerButtonAction();
-        setUpAccountManagerAction();
+        setUpAccountManagerButtonAction();
 
     }
     public void setUpCreateEmployeeButtonAction() {
@@ -48,8 +48,8 @@ public class AdminMenu extends JDialog {
         this.dispose();
         new EmployeeCreator();
     }
-    public void setUpAccountManagerAction() {
-        orderChangerButton.addActionListener(new ActionListener() {
+    public void setUpAccountManagerButtonAction() {
+        accountManagerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 goToAccountManager();
