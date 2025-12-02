@@ -13,7 +13,6 @@ public class EmployeeMenu extends JFrame {
 
     private String employeeUsername;
 
-    // 🔹 Main constructor: this is the one we will use
     public EmployeeMenu(String username) {
         this.employeeUsername = username;
 
@@ -28,9 +27,8 @@ public class EmployeeMenu extends JFrame {
         this.setVisible(true);
     }
 
-    // 🔹 Optional: remove this entirely, or make it delegate:
     public EmployeeMenu() {
-        this("Employee"); // or some default if you really want a no-arg
+        this("Employee");
     }
 
     private void setUpButtons() {

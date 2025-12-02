@@ -15,7 +15,6 @@ public class SignIn extends JFrame {
         this.setBounds(600, 200, 300, 300);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // ONE listener only
         signIn.addActionListener(e -> handleLogin());
 
         this.setVisible(true);
@@ -42,7 +41,6 @@ public class SignIn extends JFrame {
         }
 
         try {
-
             if (checkLoginAndOpenDashboard(
                     "employees",
                     usernameText,
@@ -64,7 +62,6 @@ public class SignIn extends JFrame {
                     "admin"
             )) return;
 
-
             JOptionPane.showMessageDialog(this,
                     "Invalid username or password.",
                     "Login Failed",
@@ -78,7 +75,6 @@ public class SignIn extends JFrame {
             ex.printStackTrace();
         }
     }
-
 
     private boolean checkLoginAndOpenDashboard(String tableName,
                                                String usernameText,
@@ -110,13 +106,12 @@ public class SignIn extends JFrame {
                         openEmployeeMenu(fullName, usernameText);
                         break;
                     case "customer":
-                        openCustomerMenu(fullName, usernameText);
+                        openCatalog(fullName, usernameText);
                         break;
                     case "admin":
                         openAdminMenu(fullName, usernameText);
                         break;
                 }
-
                 return true;
             }
         }
@@ -128,9 +123,9 @@ public class SignIn extends JFrame {
         new EmployeeMenu();
     }
 
-    private void openCustomerMenu(String fullName, String username) {
+    private void openCatalog(String fullName, String username) {
         this.dispose();
-        new CustomerMenu();
+        new Catalog();
     }
 
     private void openAdminMenu(String fullName, String username) {
