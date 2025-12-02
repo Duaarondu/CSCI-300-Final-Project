@@ -104,7 +104,7 @@ public class Catalog extends JFrame {
                 Object priceObj  = table.getValueAt(selectedRow, 2);  // price
                 Object quantityObj = table.getValueAt(selectedRow, 3);
 
-                //int quantity = 1; // default quantity to add
+
 
                 // 3. Add to the shared Cart model
                 Cart.cartTableModel.addRow(new Object[]{

@@ -1,6 +1,11 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Orders extends JFrame {
     private JButton cancelOrderButton;
@@ -74,7 +79,7 @@ public class Orders extends JFrame {
                     totalLabel.setText("Total: $0.00");
                 }
 
-                // 5. Feedback (optional)
+                // 5. Feedback
                 JOptionPane.showMessageDialog(
                         Orders.this,
                         "Order has been canceled."
@@ -89,10 +94,101 @@ public class Orders extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                // If cart is empty
+                if (Cart.cartTableModel.getRowCount() == 0) {
+                    JOptionPane.showMessageDialog(
+                            Orders.this,
+                            "No items to submit.",
+                            "Empty Order",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                    return;
+                }
+
+                //  Calculate total directly; similar code to line 37
+                double total = 0.0;
+                for (int row = 0; row < Cart.cartTableModel.getRowCount(); row++) {
+                    double price = Double.parseDouble(Cart.cartTableModel.getValueAt(row, 2).toString());
+                    int qty = Integer.parseInt(Cart.cartTableModel.getValueAt(row, 3).toString());
+                    total += price * qty;
+                }
+
+                try {
+                    Connection conn = Database.connection;
+
+                    // 1. Insert into orders table
+                    String orderSql = "INSERT INTO orders (total_amount) VALUES (?)";
+                    PreparedStatement orderStmt =
+                            conn.prepareStatement(orderSql, Statement.RETURN_GENERATED_KEYS);
+
+                    orderStmt.setDouble(1, total);
+                    orderStmt.executeUpdate();
+
+                    // 2. Get new order_id
+                    int orderId = -1;
+                    ResultSet keys = orderStmt.getGeneratedKeys();
+                    if (keys.next()) {
+                        orderId = keys.getInt(1);
+                    }
+                    keys.close();
+                    orderStmt.close();
+
+                    if (orderId == -1) {
+                        JOptionPane.showMessageDialog(Orders.this,
+                                "Error: Could not create order.",
+                                "Database Error",
+                                JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    // 3. Insert each item from cart into order_items table
+                    String itemSql =
+                            "INSERT INTO order_items (order_id, item_id, quantity, price) VALUES (?, ?, ?, ?)";
+                    PreparedStatement itemStmt = conn.prepareStatement(itemSql);
+
+                    for (int row = 0; row < Cart.cartTableModel.getRowCount(); row++) {
+                        int itemId = Integer.parseInt(Cart.cartTableModel.getValueAt(row, 0).toString());
+                        double price = Double.parseDouble(Cart.cartTableModel.getValueAt(row, 2).toString());
+                        int quantity = Integer.parseInt(Cart.cartTableModel.getValueAt(row, 3).toString());
+
+                        itemStmt.setInt(1, orderId);
+                        itemStmt.setInt(2, itemId);
+                        itemStmt.setInt(3, quantity);
+                        itemStmt.setDouble(4, price);
+                        itemStmt.executeUpdate();
+                    }
+
+                    itemStmt.close();
+
+                    // 4. Clear cart
+                    Cart.cartTableModel.setRowCount(0);
+                    orderTable.setModel(Cart.cartTableModel);
+                    totalLabel.setText("Total: $0.00");
+
+                    // 5. Tell user the order was saved
+                    JOptionPane.showMessageDialog(Orders.this,
+                            "Order submitted! Order ID: " + orderId);
+
+                    // 6. Go back to catalog
+                    dispose();
+                    new Catalog().setVisible(true);
+
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(
+                            Orders.this,
+                            "Error submitting order: " + ex.getMessage(),
+                            "Database Error",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                }
+
+
+
             }
         });
 
-    }
+    } //remove if needed
 
     public void SetUpBackButton() {
         backButton.addActionListener(new ActionListener() {
@@ -109,3 +205,4 @@ public class Orders extends JFrame {
 
 }
 
+//we have order_items table in mySQL workbench  which is empty
