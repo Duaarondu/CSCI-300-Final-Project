@@ -42,7 +42,7 @@ public class SignIn extends JFrame {
         }
 
         try {
-            // 1️⃣ Try employees
+
             if (checkLoginAndOpenDashboard(
                     "employees",
                     usernameText,
@@ -50,7 +50,6 @@ public class SignIn extends JFrame {
                     "employee"
             )) return;
 
-            // 2️⃣ Try customers
             if (checkLoginAndOpenDashboard(
                     "customers",
                     usernameText,
@@ -58,7 +57,6 @@ public class SignIn extends JFrame {
                     "customer"
             )) return;
 
-            // 3️⃣ Try admins
             if (checkLoginAndOpenDashboard(
                     "admins",
                     usernameText,
@@ -66,7 +64,7 @@ public class SignIn extends JFrame {
                     "admin"
             )) return;
 
-            // If all 3 failed:
+
             JOptionPane.showMessageDialog(this,
                     "Invalid username or password.",
                     "Login Failed",
@@ -81,9 +79,7 @@ public class SignIn extends JFrame {
         }
     }
 
-    /**
-     * Returns true if login succeeded for this table and opens the right dashboard.
-     */
+
     private boolean checkLoginAndOpenDashboard(String tableName,
                                                String usernameText,
                                                String passwordText,
@@ -96,7 +92,6 @@ public class SignIn extends JFrame {
 
             try (ResultSet rs = stm.executeQuery()) {
                 if (!rs.next()) {
-                    // no such username in this table → not a match, keep trying others
                     return false;
                 }
 
@@ -104,11 +99,9 @@ public class SignIn extends JFrame {
                 String fullName = rs.getString("full_name");
 
                 if (!passwordText.equals(storedPassword)) {
-                    // username exists here but password wrong → treat as failure
                     return false;
                 }
 
-                // ✅ Successful login for this role
                 JOptionPane.showMessageDialog(this,
                         "Login successful! Welcome, " + fullName + " (" + roleType + ").");
 
@@ -129,11 +122,9 @@ public class SignIn extends JFrame {
         }
     }
 
-    // 🔽 Dashboard navigation methods – adjust constructors to match your classes
 
     private void openEmployeeMenu(String fullName, String username) {
         this.dispose();
-        // If your EmployeeMenu has no args, just do: new EmployeeMenu();
         new EmployeeMenu();
     }
 
