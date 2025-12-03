@@ -17,7 +17,7 @@ public class Orders extends JFrame {
     public Orders() {
         this.setContentPane(this.panel);
         this.setTitle("Orders");
-        this.setBounds(600, 200, 300, 300);
+        this.setBounds(800, 200, 300, 300);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
